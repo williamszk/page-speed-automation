@@ -6,11 +6,16 @@ const { By, Key, Builder } = require('selenium-webdriver');
 require('chromedriver');
 let chrome = require('selenium-webdriver/chrome');
 
+const coreWebVitalsAssessment = require('./coreWebVitalsAssessment.js');
+const firstBlockOfData = require('./firstBlockOfData.js');
+const secondBlockOfData = require('./secondBlockOfData.js');
+const utils = require('./utils.js');
+
 function delay(time) {
 	return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-async function func01() {
+async function main() {
 	// var searchString = "Automation testing with Selenium and JavaScript";
 	const site = 'https://pagespeed.web.dev/';
 
@@ -23,41 +28,46 @@ async function func01() {
 		.setChromeOptions(options)
 		.build();
 
+	// wait for the page to load
 	await driver.get(site);
-
+	// maximize window
 	driver.manage().window().maximize();
 
-	let myNode = await driver.findElements(
+	// find the place to write the url we want to search
+	let myNodes = await driver.findElements(
 		By.xpath("//input[@placeholder='Enter a web page URL']")
 	);
-	typeStringIntoInput(myNode[0], 'https://www.medcel.com.br/', 3000);
 
-	{
-		/* <span jsname="V67aGc" class="VfPpkd-vQzf8d">Analyze</span> */
-	}
-	myNode = await driver.findElements(By.xpath("//span[text()='Analyze']"));
-	myNode[0].click();
+	// type the url and wait 2s
+	await utils.typeStringIntoInput(
+		myNodes[0],
+		'https://www.medcel.com.br/',
+		2000
+	);
 
-	// const actions = driver.actions({ bridge: true });
-	// await driver
-	// 	.findElement(By.xpath("//span[text()='Cursos Completos']"))
-	// 	.then((elem00) => {
-	// 		actions
-	// 			.move({ duration: 3000, origin: elem00, x: 0, y: 0 })
-	// 			.perform()
-	// 			.then(() => {
-	// 				console.log('>>>>> Monkey 00');
-	// 			});
-	// 		console.log('>>>>> Monkey 01');
-	// 	});
+	// find the button to click
+	myNodes = await driver.findElements(By.xpath("//span[text()='Analyze']"));
+	await myNodes[0].click();
+	await utils.sleep(10000, 'waiting for app to analyze URL');
 
-	await delay(120000).then(() => console.log('ran after 120 second passed'));
+	let gatherStats = {};
+	gatherStats.mobile = {};
+
+	// get data from Core Web Vital Assessment (it is just Failed or Success) ====
+	const theText = await coreWebVitalsAssessment.collect(driver);
+	gatherStats.mobile.coreWebVitalsAssessment = theText;
+
+	// get data from the first block =============================================
+	let statsFirstBlock = await firstBlockOfData.collect(driver);
+	gatherStats.mobile.statsFirstBlock = statsFirstBlock;
+
+	// get data from the second block =============================================
+	let statsSecondBlock = await secondBlockOfData.collect(driver);
+	gatherStats.mobile.statsSecondBlock = statsSecondBlock;
+
+	console.log(gatherStats);
+	await utils.sleep(120000, 'ran after 120 second passed');
 	await driver.quit();
 }
 
-const typeStringIntoInput = async (element, word, waitTime = 0) => {
-	element.sendKeys(word);
-	await delay(waitTime).then(() => null);
-};
-
-func01();
+main();
