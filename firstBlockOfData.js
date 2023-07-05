@@ -1,4 +1,4 @@
-const { By, Key, Builder } = require('selenium-webdriver');
+const { By } = require('selenium-webdriver');
 
 const collect = async (driver) => {
 	let gatherStats = {};
@@ -51,8 +51,6 @@ const helperFindNodeWithStats = async (driver, theText) => {
 		By.xpath('following-sibling::*[1]')
 	);
 	const theNumber = await siblingNodeFromParent.getText();
-	// theNumber is e.g. 4s; 45ms; etc
-	// TODO: we need to transform this string into a number
 	return theNumber;
 };
 

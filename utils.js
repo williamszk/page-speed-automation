@@ -3,9 +3,9 @@ const sleep = async (waitTime, customMessage) => {
 	await delay(waitTime).then(() => null);
 };
 
-function delay(time) {
+const delay = (time) => {
 	return new Promise((resolve) => setTimeout(resolve, time));
-}
+};
 
 const typeStringIntoInput = async (element, word, waitTime = 0) => {
 	element.sendKeys(word);

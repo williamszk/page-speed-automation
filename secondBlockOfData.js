@@ -6,7 +6,7 @@ const { By } = require('selenium-webdriver');
 const collect = async (driver) => {
 	// scroll down the window
 	driver.executeScript('window.scrollBy(0, 500);');
-	await utils.sleep(20000, 'waiting for loading the second block...');
+	await utils.sleep(20000, 'waiting to load the second block...');
 
 	let gatherStats = {};
 	// collect data

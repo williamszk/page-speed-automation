@@ -9,5 +9,5 @@ node -v
 npm install selenium-webdriver
 npm install chromedriver
 
-node index.js
+node main.js
 
