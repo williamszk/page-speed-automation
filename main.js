@@ -4,11 +4,8 @@
 
 const { By } = require('selenium-webdriver');
 const coreWebVitalsAssessment = require('./coreWebVitalsAssessment.js');
-const coreWebVitalsAssessmentDesktop = require('./coreWebVitalsAssessmentDesktop.js');
 const firstBlockOfData = require('./firstBlockOfData.js');
-const firstBlockOfDataDesktop = require('./firstBlockOfDataDesktop.js');
 const secondBlockOfData = require('./secondBlockOfData.js');
-const secondBlockOfDataDesktop = require('./secondBlockOfDataDesktop.js');
 const utils = require('./utils.js');
 const pagespeedFunctions = require('./pagespeedFunctions.js');
 
@@ -25,15 +22,15 @@ const main = async () => {
 	// =============== Mobile ===================================================
 
 	// get data from Core Web Vital Assessment (the data from this one is just Failed or Success)
-	const theText = await coreWebVitalsAssessment.collect(driver);
+	const theText = await coreWebVitalsAssessment.collect(driver, 'mobile');
 	gatherStats.mobile.coreWebVitalsAssessment = theText;
 
 	// get data from the first block -------------------------------------------
-	let statsFirstBlock = await firstBlockOfData.collect(driver);
+	let statsFirstBlock = await firstBlockOfData.collect(driver, 'mobile');
 	gatherStats.mobile.statsFirstBlock = statsFirstBlock;
 
 	// get data from the second block ------------------------------------------
-	let statsSecondBlock = await secondBlockOfData.collect(driver);
+	let statsSecondBlock = await secondBlockOfData.collect(driver, 'mobile');
 	gatherStats.mobile.statsSecondBlock = statsSecondBlock;
 
 	// =============== Desktop ==================================================
@@ -50,15 +47,15 @@ const main = async () => {
 	await utils.sleep(20000, 'waiting to load the second block...');
 
 	// get data from Core Web Vital Assessment (the data from this one is just Failed or Success)
-	const theText2 = await coreWebVitalsAssessmentDesktop.collect(driver);
+	const theText2 = await coreWebVitalsAssessment.collect(driver, 'desktop');
 	gatherStats.desktop.coreWebVitalsAssessment = theText2;
 
 	// get data from the first block -------------------------------------------
-	let statsFirstBlock2 = await firstBlockOfDataDesktop.collect(driver);
+	let statsFirstBlock2 = await firstBlockOfData.collect(driver, 'desktop');
 	gatherStats.desktop.statsFirstBlock = statsFirstBlock2;
 
 	// get data from the second block ------------------------------------------
-	let statsSecondBlock2 = await secondBlockOfDataDesktop.collect(driver);
+	let statsSecondBlock2 = await secondBlockOfData.collect(driver, 'desktop');
 	gatherStats.desktop.statsSecondBlock = statsSecondBlock2;
 
 	// =============== End ==================================================

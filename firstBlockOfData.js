@@ -1,57 +1,86 @@
 const { By } = require('selenium-webdriver');
 
-const collect = async (driver) => {
+const collect = async (driver, type) => {
 	let gatherStats = {};
 
 	gatherStats.largestContentfulPaint = await helperFindNodeWithStats(
 		driver,
-		'Largest Contentful Paint (LCP)'
+		'Largest Contentful Paint (LCP)',
+		type
 	);
 
 	gatherStats.firstInputDelay = await helperFindNodeWithStats(
 		driver,
-		'First Input Delay (FID)'
+		'First Input Delay (FID)',
+		type
 	);
 
 	gatherStats.cumulativeLayoutShift = await helperFindNodeWithStats(
 		driver,
-		'Cumulative Layout Shift (CLS)'
+		'Cumulative Layout Shift (CLS)',
+		type
 	);
 
 	gatherStats.firstContentfulPaint = await helperFindNodeWithStats(
 		driver,
-		'First Contentful Paint (FCP)'
+		'First Contentful Paint (FCP)',
+		type
 	);
 
 	gatherStats.firstContentfulPaint = await helperFindNodeWithStats(
 		driver,
-		'First Contentful Paint (FCP)'
+		'First Contentful Paint (FCP)',
+		type
 	);
 
 	gatherStats.interactionToNextPaint = await helperFindNodeWithStats(
 		driver,
-		'Interaction to Next Paint (INP)'
+		'Interaction to Next Paint (INP)',
+		type
 	);
 
 	gatherStats.timeToFirstByte = await helperFindNodeWithStats(
 		driver,
-		'Time to First Byte (TTFB)'
+		'Time to First Byte (TTFB)',
+		type
 	);
 
 	return gatherStats;
 };
 // getTheFirstBlockOfData
-const helperFindNodeWithStats = async (driver, theText) => {
-	// first, find the node which contains the text
-	myNode = await driver.findElement(By.xpath(`//a[text()='${theText}']`));
-	// we need to go up one level
-	let parentNode = await myNode.findElement(By.xpath('./..'));
+const helperFindNodeWithStats = async (driver, theText, type) => {
+	// // first, find the node which contains the text
+	// myNode = await driver.findElement(By.xpath(`//a[text()='${theText}']`));
+	// // we need to go up one level
+	// let parentNode = await myNode.findElement(By.xpath('./..'));
+	let parentNode = await findParentNode(driver, theText, type);
+
 	// then the next sibling is where the number of interest is
 	let siblingNodeFromParent = await parentNode.findElement(
 		By.xpath('following-sibling::*[1]')
 	);
 	const theNumber = await siblingNodeFromParent.getText();
 	return theNumber;
+};
+
+const findParentNode = async (driver, theText, type) => {
+	let parentNode;
+	if (type === 'mobile') {
+		// first, find the node which contains the text
+		let myNode = await driver.findElement(By.xpath(`//a[text()='${theText}']`));
+		// we need to go up one level
+		parentNode = await myNode.findElement(By.xpath('./..'));
+	} else if (type === 'desktop') {
+		// first, find the node which contains the text
+		let myNodes = await driver.findElements(
+			By.xpath(`//a[text()='${theText}']`)
+		);
+		// NOTE: After some experimentation I found that is the third element which contains
+		// the data that we are interested in. This is flaky, so note that in the future.
+		// we need to go up one level
+		parentNode = await myNodes[2].findElement(By.xpath('./..'));
+	}
+	return parentNode;
 };
 
 module.exports = {
