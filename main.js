@@ -2,10 +2,13 @@
 
 // https://pagespeed.web.dev/
 
-const { By, Builder } = require('selenium-webdriver');
+const { By } = require('selenium-webdriver');
 const coreWebVitalsAssessment = require('./coreWebVitalsAssessment.js');
+const coreWebVitalsAssessmentDesktop = require('./coreWebVitalsAssessmentDesktop.js');
 const firstBlockOfData = require('./firstBlockOfData.js');
+const firstBlockOfDataDesktop = require('./firstBlockOfDataDesktop.js');
 const secondBlockOfData = require('./secondBlockOfData.js');
+const secondBlockOfDataDesktop = require('./secondBlockOfDataDesktop.js');
 const utils = require('./utils.js');
 const pagespeedFunctions = require('./pagespeedFunctions.js');
 
@@ -34,11 +37,7 @@ const main = async () => {
 	gatherStats.mobile.statsSecondBlock = statsSecondBlock;
 
 	// =============== Desktop ==================================================
-	// TODO: investigate why in the case of desktop we are not being able to collect
-	// data the same way as it is in mobile.
-	// If needed build the same functions for the case of Desktop.
-
-	await utils.sleep(10000, 'waiting to start Desktop data collection');
+	await utils.sleep(2000, 'waiting to start Desktop data collection');
 
 	// change to desktop
 	let myNode2 = await driver.findElement(
@@ -51,15 +50,15 @@ const main = async () => {
 	await utils.sleep(20000, 'waiting to load the second block...');
 
 	// get data from Core Web Vital Assessment (the data from this one is just Failed or Success)
-	const theText2 = await coreWebVitalsAssessment.collect(driver);
+	const theText2 = await coreWebVitalsAssessmentDesktop.collect(driver);
 	gatherStats.desktop.coreWebVitalsAssessment = theText2;
 
 	// get data from the first block -------------------------------------------
-	let statsFirstBlock2 = await firstBlockOfData.collect(driver);
+	let statsFirstBlock2 = await firstBlockOfDataDesktop.collect(driver);
 	gatherStats.desktop.statsFirstBlock = statsFirstBlock2;
 
 	// get data from the second block ------------------------------------------
-	let statsSecondBlock2 = await secondBlockOfData.collect(driver);
+	let statsSecondBlock2 = await secondBlockOfDataDesktop.collect(driver);
 	gatherStats.desktop.statsSecondBlock = statsSecondBlock2;
 
 	// =============== End ==================================================
