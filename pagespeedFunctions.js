@@ -9,6 +9,7 @@ const prepareDriver = async (site) => {
 
 	let options = new chrome.Options();
 	options.addArguments('--incognito');
+	options.addArguments('--headless');
 
 	// To wait for browser to build and launch properly
 	let driver = await new Builder()

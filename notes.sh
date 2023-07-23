@@ -10,4 +10,3 @@ npm install selenium-webdriver
 npm install chromedriver
 
 node main.js
-

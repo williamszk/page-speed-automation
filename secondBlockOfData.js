@@ -1,4 +1,3 @@
-const { setDefaultService } = require('selenium-webdriver/chrome.js');
 const utils = require('./utils.js');
 
 const { By } = require('selenium-webdriver');
