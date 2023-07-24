@@ -1,8 +1,10 @@
 
-url=ec2-15-228-39-121.sa-east-1.compute.amazonaws.com
-
+# -----------------------------------------------------------------------------
+# url=ec2-15-228-39-121.sa-east-1.compute.amazonaws.com
+url=ec2-15-228-254-243.sa-east-1.compute.amazonaws.com
 sudo chmod 400 /home/william/Documents/aws_some_notes/personal_aws/my-personal-key-pair.pem
 sudo ssh -i /home/william/Documents/aws_some_notes/personal_aws/my-personal-key-pair.pem ubuntu@$url
+# -----------------------------------------------------------------------------
 
 # [inside the ec2 instance]
 sudo apt update
@@ -34,4 +36,5 @@ google-chrome-stable -version
 
 # check if the program runs
 cd page-speed-automation/
+git pull
 node main.js

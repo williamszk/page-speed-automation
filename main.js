@@ -44,7 +44,7 @@ const main = async () => {
 
 	await utils.sleep(10000, 'waiting to analyze Desktop');
 	driver.executeScript('window.scrollBy(0, -500);');
-	await utils.sleep(20000, 'waiting to load the second block...');
+	await utils.sleep(20000, 'waiting to load the first block...');
 
 	// get data from Core Web Vital Assessment (the data from this one is just Failed or Success)
 	const theText2 = await coreWebVitalsAssessment.collect(driver, 'desktop');
