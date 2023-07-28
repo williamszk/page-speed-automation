@@ -4,6 +4,11 @@ In this project we build an automation for the page speed web site
 
 ## To-do
 
+- [ ] migrate code base to typescript
+    https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html
+- [ ] let's implement the local save
+- [ ] then implement to save it in S3
+- [ ] this decision should come from a config file
 - [ ] Setup an EC2 instance, t2-micro with the scrapper for it to run everyday to gather the data.
 I think using AWS EC2 for some time will give me some exposure to having to take care of infrastructure
 for some time. Later I could try to use different modes of EC2, like spot mode. And see if I can decrease

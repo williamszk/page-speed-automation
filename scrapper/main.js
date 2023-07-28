@@ -60,7 +60,11 @@ const main = async () => {
 
 	// =============== End ==================================================
 	console.log(gatherStats);
-	await utils.sleep(1200000, 'waiting to get the data');
+
+	// TODO: we need to save the data some how
+	// wen can just build an interface which have two functions:
+
+	await utils.sleep(120, 'waiting to get the data');
 	await driver.quit();
 };
 
