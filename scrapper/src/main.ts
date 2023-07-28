@@ -15,9 +15,42 @@ const main = async () => {
 	const urlToAnalyze = 'https://www.medcel.com.br/';
 	await pagespeedFunctions.analyzeUrl(driver, urlToAnalyze);
 
-	let gatherStats = {};
-	gatherStats.mobile = {};
-	gatherStats.desktop = {};
+	let gatherStats: GatherStats = {
+		mobile: {
+			coreWebVitalsAssessment: '',
+			statsFirstBlock: {
+				cumulativeLayoutShift: '',
+				firstContentfulPaint: '',
+				firstInputDelay: '',
+				interactionToNextPaint: '',
+				largestContentfulPaint: '',
+				timeToFirstByte: '',
+			},
+			statsSecondBlock: {
+				accessibility: '',
+				bestPractices: '',
+				performance: '',
+				seo: '',
+			},
+		},
+		desktop: {
+			coreWebVitalsAssessment: '',
+			statsFirstBlock: {
+				cumulativeLayoutShift: '',
+				firstContentfulPaint: '',
+				firstInputDelay: '',
+				interactionToNextPaint: '',
+				largestContentfulPaint: '',
+				timeToFirstByte: '',
+			},
+			statsSecondBlock: {
+				accessibility: '',
+				bestPractices: '',
+				performance: '',
+				seo: '',
+			},
+		},
+	};
 
 	// =============== Mobile ===================================================
 
@@ -64,7 +97,7 @@ const main = async () => {
 	// TODO: we need to save the data some how
 	// wen can just build an interface which have two functions:
 
-	await utils.sleep(120, 'waiting to get the data');
+	await utils.sleep(12000, 'waiting to get the data');
 	await driver.quit();
 };
 

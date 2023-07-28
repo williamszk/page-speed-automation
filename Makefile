@@ -1,3 +1,6 @@
 
+build-scrapper:
+	tsc -p scrapper/
+
 run-scrapper:
-	node scrapper/main.js
+	node scrapper/built/main.js

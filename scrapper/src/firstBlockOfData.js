@@ -27,12 +27,6 @@ const collect = async (driver, type) => {
 		type
 	);
 
-	gatherStats.firstContentfulPaint = await helperFindNodeWithStats(
-		driver,
-		'First Contentful Paint (FCP)',
-		type
-	);
-
 	gatherStats.interactionToNextPaint = await helperFindNodeWithStats(
 		driver,
 		'Interaction to Next Paint (INP)',
