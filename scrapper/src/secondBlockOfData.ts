@@ -1,32 +1,38 @@
 const utils = require('./utils.js');
 
-const { By } = require('selenium-webdriver');
+// const { By } = require('selenium-webdriver');
+import { By, Builder } from 'selenium-webdriver';
 
 const collect = async (driver, type) => {
 	// scroll down the window
 	driver.executeScript('window.scrollBy(0, 500);');
 	await utils.sleep(20000, 'waiting to load the second block...');
 
-	let gatherStats = {};
+	let secondBlock: DataContainerSecondBlock = {
+		accessibility: '',
+		bestPractices: '',
+		performance: '',
+		seo: '',
+	};
 	// collect data
-	gatherStats.performance = await helperFindNodeWithStats(
+	secondBlock.performance = await helperFindNodeWithStats(
 		driver,
 		'#performance',
 		type
 	);
-	gatherStats.accessibility = await helperFindNodeWithStats(
+	secondBlock.accessibility = await helperFindNodeWithStats(
 		driver,
 		'#accessibility',
 		type
 	);
-	gatherStats.bestPractices = await helperFindNodeWithStats(
+	secondBlock.bestPractices = await helperFindNodeWithStats(
 		driver,
 		'#best-practices',
 		type
 	);
-	gatherStats.seo = await helperFindNodeWithStats(driver, '#seo', type);
+	secondBlock.seo = await helperFindNodeWithStats(driver, '#seo', type);
 
-	return gatherStats;
+	return secondBlock;
 };
 
 const helperFindNodeWithStats = async (driver, searchingText, type) => {

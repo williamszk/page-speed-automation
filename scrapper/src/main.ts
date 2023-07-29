@@ -2,7 +2,8 @@
 
 // https://pagespeed.web.dev/
 
-const { By } = require('selenium-webdriver');
+// const { By } = require('selenium-webdriver');
+import { By } from 'selenium-webdriver';
 const coreWebVitalsAssessment = require('./coreWebVitalsAssessment.js');
 const firstBlockOfData = require('./firstBlockOfData.js');
 const secondBlockOfData = require('./secondBlockOfData.js');

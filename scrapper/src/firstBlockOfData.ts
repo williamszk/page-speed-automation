@@ -1,45 +1,53 @@
-const { By } = require('selenium-webdriver');
+// const { By } = require('selenium-webdriver');
+import { By } from 'selenium-webdriver';
 
 const collect = async (driver, type) => {
-	let gatherStats = {};
+	let firstBlock: DataContainerFirstBlock = {
+		cumulativeLayoutShift: '',
+		firstContentfulPaint: '',
+		firstInputDelay: '',
+		interactionToNextPaint: '',
+		largestContentfulPaint: '',
+		timeToFirstByte: '',
+	};
 
-	gatherStats.largestContentfulPaint = await helperFindNodeWithStats(
+	firstBlock.largestContentfulPaint = await helperFindNodeWithStats(
 		driver,
 		'Largest Contentful Paint (LCP)',
 		type
 	);
 
-	gatherStats.firstInputDelay = await helperFindNodeWithStats(
+	firstBlock.firstInputDelay = await helperFindNodeWithStats(
 		driver,
 		'First Input Delay (FID)',
 		type
 	);
 
-	gatherStats.cumulativeLayoutShift = await helperFindNodeWithStats(
+	firstBlock.cumulativeLayoutShift = await helperFindNodeWithStats(
 		driver,
 		'Cumulative Layout Shift (CLS)',
 		type
 	);
 
-	gatherStats.firstContentfulPaint = await helperFindNodeWithStats(
+	firstBlock.firstContentfulPaint = await helperFindNodeWithStats(
 		driver,
 		'First Contentful Paint (FCP)',
 		type
 	);
 
-	gatherStats.interactionToNextPaint = await helperFindNodeWithStats(
+	firstBlock.interactionToNextPaint = await helperFindNodeWithStats(
 		driver,
 		'Interaction to Next Paint (INP)',
 		type
 	);
 
-	gatherStats.timeToFirstByte = await helperFindNodeWithStats(
+	firstBlock.timeToFirstByte = await helperFindNodeWithStats(
 		driver,
 		'Time to First Byte (TTFB)',
 		type
 	);
 
-	return gatherStats;
+	return firstBlock;
 };
 // getTheFirstBlockOfData
 const helperFindNodeWithStats = async (driver, theText, type) => {

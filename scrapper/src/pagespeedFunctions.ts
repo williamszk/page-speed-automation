@@ -1,4 +1,5 @@
-const { By, Builder } = require('selenium-webdriver');
+// const { By, Builder } = require('selenium-webdriver');
+import { By, Builder } from 'selenium-webdriver';
 require('chromedriver');
 let chrome = require('selenium-webdriver/chrome');
 const utils = require('./utils.js');

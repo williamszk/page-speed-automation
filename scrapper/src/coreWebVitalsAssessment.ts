@@ -1,13 +1,10 @@
-const { By, Key, Builder } = require('selenium-webdriver');
+// const { By, Key, Builder } = require('selenium-webdriver');
+import { By, Key, Builder } from 'selenium-webdriver';
 
 const collect = async (driver, type) => {
 	// get data from the Core Web Vitals Assessment
 	let parentNode = await findParentNode(driver, type);
-	// let theParent = await driver.findElement(
-	// 	By.xpath("//div[contains(text(), 'Core Web Vitals Assessment')]")
-	// );
-	// // find the first child element of the previous node
-	firstChildNode = await parentNode.findElement(By.xpath('./*'));
+	let firstChildNode = await parentNode.findElement(By.xpath('./*'));
 	const theText = await firstChildNode.getText();
 	return theText;
 };
