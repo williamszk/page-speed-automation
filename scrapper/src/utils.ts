@@ -12,7 +12,9 @@ const typeStringIntoInput = async (element, word, waitTime = 0) => {
 	await delay(waitTime).then(() => null);
 };
 
-module.exports = {
+const utils = {
 	sleep,
 	typeStringIntoInput,
 };
+
+export default utils;

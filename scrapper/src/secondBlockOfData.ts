@@ -1,7 +1,5 @@
-const utils = require('./utils.js');
-
-// const { By } = require('selenium-webdriver');
-import { By, Builder } from 'selenium-webdriver';
+import utils from './utils';
+import { By } from 'selenium-webdriver';
 
 const collect = async (driver, type) => {
 	// scroll down the window
@@ -63,6 +61,12 @@ const findTheText = async (driver, searchingText, type) => {
 	return theText;
 };
 
-module.exports = {
+// module.exports = {
+// 	collect,
+// };
+
+const secondBlockOfData = {
 	collect,
 };
+
+export default secondBlockOfData;

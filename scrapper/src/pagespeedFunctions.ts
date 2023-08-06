@@ -1,8 +1,7 @@
-// const { By, Builder } = require('selenium-webdriver');
 import { By, Builder } from 'selenium-webdriver';
 require('chromedriver');
 let chrome = require('selenium-webdriver/chrome');
-const utils = require('./utils.js');
+import utils from './utils';
 
 const prepareDriver = async (site) => {
 	// var searchString = "Automation testing with Selenium and JavaScript";
@@ -41,7 +40,9 @@ const analyzeUrl = async (driver, urlToAnalyze) => {
 	await utils.sleep(10000, 'waiting for app to analyze URL');
 };
 
-module.exports = {
+const pagespeedFunctions = {
 	prepareDriver,
 	analyzeUrl,
 };
+
+export default pagespeedFunctions;

@@ -26,6 +26,8 @@ const findParentNode = async (driver, type) => {
 	return parentNode;
 };
 
-module.exports = {
+const coreWebVitalsAssessments = {
 	collect,
 };
+
+export default coreWebVitalsAssessments;

@@ -2,13 +2,13 @@
 
 // https://pagespeed.web.dev/
 
-// const { By } = require('selenium-webdriver');
 import { By } from 'selenium-webdriver';
-const coreWebVitalsAssessment = require('./coreWebVitalsAssessment.js');
-const firstBlockOfData = require('./firstBlockOfData.js');
-const secondBlockOfData = require('./secondBlockOfData.js');
-const utils = require('./utils.js');
-const pagespeedFunctions = require('./pagespeedFunctions.js');
+import coreWebVitalsAssessment from './coreWebVitalsAssessment';
+import firstBlockOfData from './firstBlockOfData';
+import secondBlockOfData from './secondBlockOfData';
+import utils from './utils';
+import pagespeedFunctions from './pagespeedFunctions';
+import repository from './repository/repository';
 
 const main = async () => {
 	const site = 'https://pagespeed.web.dev/';
@@ -93,7 +93,8 @@ const main = async () => {
 	gatherStats.desktop.statsSecondBlock = statsSecondBlock2;
 
 	// =============== End ==================================================
-	console.log(gatherStats);
+
+	repository.storeStats(gatherStats);
 
 	// TODO: we need to save the data some how
 	// wen can just build an interface which have two functions:

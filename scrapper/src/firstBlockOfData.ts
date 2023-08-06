@@ -85,6 +85,8 @@ const findParentNode = async (driver, theText, type) => {
 	return parentNode;
 };
 
-module.exports = {
+const firstBlockOfData = {
 	collect,
 };
+
+export default firstBlockOfData;
