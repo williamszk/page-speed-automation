@@ -4,6 +4,7 @@ In this project we build an automation for the page speed web site
 
 ## To-do
 
+- [ ] Include timestamp in the final json object of gatherStats
 - [ ] let's implement the local save, just use the local file system; this decision should come from a config file; we'll call the `repository` the place where we store the code that will be used for the persistence layer.
 - [ ] then implement to save it in S3
 - [ ] save the data into disk, we need to save a history of those files maybe we should save them in S3
