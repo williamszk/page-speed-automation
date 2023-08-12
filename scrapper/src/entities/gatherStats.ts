@@ -1,4 +1,5 @@
 type GatherStats = {
+	dateTimeGMT: string;
 	mobile: DataContainer01;
 	desktop: DataContainer01;
 };

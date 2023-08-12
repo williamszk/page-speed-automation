@@ -17,6 +17,7 @@ const main = async () => {
 	await pagespeedFunctions.analyzeUrl(driver, urlToAnalyze);
 
 	let gatherStats: GatherStats = {
+		dateTimeGMT: '',
 		mobile: {
 			coreWebVitalsAssessment: '',
 			statsFirstBlock: {
@@ -91,6 +92,10 @@ const main = async () => {
 	// get data from the second block ------------------------------------------
 	let statsSecondBlock2 = await secondBlockOfData.collect(driver, 'desktop');
 	gatherStats.desktop.statsSecondBlock = statsSecondBlock2;
+
+	// add time stamp to gatherStats -------------------------------------------
+	const dateTimeGMT = new Date().toUTCString();
+	gatherStats.dateTimeGMT = dateTimeGMT;
 
 	// =============== End ==================================================
 
