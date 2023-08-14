@@ -5,7 +5,8 @@ rm-build:
 	rm -rf scrapper/built
 
 build-scrapper:
-	tsc -p scrapper/
+	cd scrapper/ && \
+	tsc
 
 run-scrapper:
 	node scrapper/built/main.js
