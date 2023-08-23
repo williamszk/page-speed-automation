@@ -1,17 +1,18 @@
 // This is the common interface for the gatherStats object
-import { writeFile } from 'fs';
+//
+//
+
+import localFilesystemRepository from './localFilesystem/repository';
 
 const storeStats = (gatherStats: GatherStats) => {
-	console.log('Storing stasts!');
-	console.log('gatherStats:', gatherStats);
-
-	// this code should be transferred later to its correct repository layer
-	let jsonFile = JSON.stringify(gatherStats);
-	console.log('jsonFile:', jsonFile);
-
-	writeFile('myJsonFile.json', jsonFile, () => {
-		console.log('We are saving the file myJsonFile.json');
-	});
+	const whichRepository = "localFilesystem"
+	switch (whichRepository) {
+		case 'localFilesystem':
+			localFilesystemRepository.storeStats(gatherStats);
+			break;
+		default:
+			break;
+	}
 };
 
 const repository = {
