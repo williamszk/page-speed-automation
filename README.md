@@ -4,6 +4,12 @@ In this project we build an automation for the page speed web site
 
 ## To-do
 
+- [ ] We should have a way to tell which URL we are analyzing, it should be in
+      the body of the json and also in the name, maybe we can set up the url to be
+      analyze inside a config file and pass the config file path as a parameter
+      to the main.js program as a CLI argument
+- [ ] Save the downloaded json into my personal S3 bucket, I need to setup the bucket
+      then to allow the host machine to be able to access the S3 bucket.
 - [ ] Setup crontab to run the script every day.
 - [ ] let's implement the local save, just use the local file system;
       this decision should come from a config file; we'll call the `repository`

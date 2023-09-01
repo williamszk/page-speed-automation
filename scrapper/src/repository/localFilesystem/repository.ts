@@ -2,14 +2,22 @@
 //
 //
 
-import { writeFile } from 'fs';
+import { writeFile, existsSync, mkdirSync } from 'fs';
+import utils from '../../utils';
 
 const storeStats = (gatherStats: GatherStats) => {
 	let jsonFile = JSON.stringify(gatherStats);
-	console.log('jsonFile:', jsonFile);
 
-	writeFile('myJsonFile.json', jsonFile, () => {
-		console.log('We are saving the file myJsonFile.json');
+	// create directory for storing the gathered stats
+	const dir = './data/';
+	if (!existsSync(dir)) {
+		mkdirSync(dir, { recursive: true });
+	}
+
+	// create directory for storing the gathered stats
+	const fileName = `${utils.getTimestamp()}.json`;
+	writeFile(`data/${fileName}`, jsonFile, () => {
+		console.log('We are saving the json file');
 	});
 };
 
